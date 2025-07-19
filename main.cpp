@@ -8,6 +8,7 @@
 #include <iostream>
 #include "cadastrar/cadastrar.hpp"
 #include "visualizar/visualizar.hpp"
+#include "atualizar/atualizar.hpp"
 
 
 
@@ -24,11 +25,13 @@ private:
     Fl_Window *window;
     Fl_Box *labalInicial;
     Fl_Button *botaoCadastrar, *botaoVisualizar;
+    Fl_Button *botaoAtualizar;
     Fl_Box *tituloTotal, *totalAluno;
     Fl_Group *grupo;
     pqxx::connection* conn;
     static void botaoCadastrarCallback(Fl_Widget *widget, void *data);
     static void botaoVisualizarCallback(Fl_Widget *widget, void *data);
+    static void botaoAtualizarCallback(Fl_Widget *widget, void *data);
 };
 
 
@@ -68,6 +71,14 @@ void Janela::botaoVisualizarCallback(Fl_Widget *widget, void *data) {
     janelaAtual->window->show();
 }
 
+void Janela::botaoAtualizarCallback(Fl_Widget *widget, void *data){
+    Janela* janelaAtual = static_cast<Janela*>(data);
+    janelaAtual->window->hide();
+    Atualizar *janelaAtualizar = new Atualizar(500, 400, "Atualizar");
+    janelaAtual->mostrar(0, nullptr);
+    janelaAtual->window->show();
+}
+
 
 
 
@@ -93,6 +104,20 @@ Janela::Janela(int largura, int altura, const char* titulo) {
     botaoVisualizar->labelcolor(fl_rgb_color(255, 255, 255));
     botaoVisualizar->box(FL_ROUND_UP_BOX);
     botaoVisualizar->callback(botaoVisualizarCallback, this);
+
+
+    botaoVisualizar = new Fl_Button(150,80,100,30, "Visualizar");
+    botaoVisualizar->color(fl_rgb_color(3, 173, 252));
+    botaoVisualizar->labelcolor(fl_rgb_color(255, 255, 255));
+    botaoVisualizar->box(FL_ROUND_UP_BOX);
+    botaoVisualizar->callback(botaoVisualizarCallback, this);
+
+
+    botaoAtualizar = new Fl_Button(150,80,100,30, "Visualizar");
+    botaoAtualizar->color(fl_rgb_color(3, 173, 252));
+    botaoAtualizar->labelcolor(fl_rgb_color(255, 255, 255));
+    botaoAtualizar->box(FL_ROUND_UP_BOX);
+    botaoAtualizar->callback(botaoAtualizarCallback, this);
    
 
 

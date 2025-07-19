@@ -25,7 +25,7 @@ void CadastrarDados::salvarDados(){
     }
     pqxx::work w(*conn);
     try{
-        w.exec("INSERT INTO tabela (nome, email, cpf, data_nascimento, rua, bairro) "
+        w.exec("INSERT INTO alunos(nome, email, cpf, data_nascimento, rua, bairro) "
             "VALUES ('" + w.quote(nome) + "', '" + w.quote(email) + "', '" + w.quote(cpf) + "', '" + w.quote(dataNascimento) + "', '" + w.quote(ruaCasa) + "', '" + w.quote(bairro) + "')");
         w.commit();      
         fl_message("Dados inseridos com sucesso.");
