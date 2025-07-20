@@ -14,7 +14,7 @@ pqxx::connection* Atualizar::banco() {
 
 void callbackMenuVoltarAtualizar(Fl_Widget *widget, void *data) {
     Atualizar* cad = static_cast<Atualizar*>(data);
-    cad->fecharJanela();
+    cad->fecharJanelaAtualizar();
     exit(0);
 };
 
@@ -254,7 +254,7 @@ Atualizar::~Atualizar() {
     delete conn;
 }
 
-void Atualizar::fecharJanela(){
+void Atualizar::fecharJanelaAtualizar(){
     windows->hide();
 }
 

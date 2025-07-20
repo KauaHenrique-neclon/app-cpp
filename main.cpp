@@ -181,4 +181,4 @@ int main(int argc, char **argv) {
 }
 
 
-// g++ main.cpp cadastrar/cadastrar.cpp visualizar/visualizar.cpp -o main.exe -mwindows -lfltk -lfltk_images -lpng -ljpeg -lpqxx -lpq
+// g++ main.cpp cadastrar/cadastrar.cpp visualizar/visualizar.cpp atualizar/atualizar.cpp dashboard/dashboard.cpp -o main.exe -mwindows -lfltk -lfltk_images -lpng -ljpeg -lpqxx -lpq
