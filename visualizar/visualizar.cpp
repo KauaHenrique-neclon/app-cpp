@@ -32,13 +32,13 @@ pqxx::result Visualizar::buscarDados(){
 }
 
 
-
+/*
 void callbackMenuVoltarVisualizar(Fl_Widget *widget, void *data) {
     Visualizar* cad = static_cast<Visualizar*>(data);
     cad->fecharJanela();
     exit(0);
 }
-
+*/
 
 void callbackMenuVoltarVisualizar(Fl_Widget *widget, void *data) {
     Visualizar* cad = static_cast<Visualizar*>(data);
@@ -57,7 +57,7 @@ Visualizar::Visualizar(int largura, int altura, const char* titulo) {
     tabela = new Fl_Table(10, 10, largura - 20, altura - 50);
     tabela->rows(0);
     tabela->cols(6);
-    tabela->callback(table_callback, this);
+    tabela->callback(tablecallback, this);
     tabela->end();
     preencherTabela(); 
     windows->end();
@@ -89,19 +89,19 @@ void Visualizar::preencherTabela() {
 }
 
 
-void Visualizar::draw_cell(Fl_Table* table, int row, int col, int X, int Y, int W, int H, Visualizar* instance) {
+void Visualizar::drawcell(Fl_Table* table, int row, int col, int X, int Y, int W, int H, Visualizar* instance) {
     if (row >= instance->dados.size() || col >= instance->dados[row].size()) return;
     fl_draw(instance->dados[row][col].c_str(), X + 2, Y + 14);
 }
 
-void Visualizar::table_callback(Fl_Widget* w, void* data) {
+void Visualizar::tablecallback(Fl_Widget* w, void* data) {
     Fl_Table* table = static_cast<Fl_Table*>(w);
     Visualizar* viz = static_cast<Visualizar*>(data);
     int row = table->callback_row();
     int col = table->callback_col();
 
     if (row < 0 || col < 0) return; 
-    draw_cell(table, row, col, table->x(), table->y(), table->w(), table->h(), viz);
+    drawcell(table, row, col, table->x(), table->y(), table->w(), table->h(), viz);
 }
 
 

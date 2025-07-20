@@ -52,7 +52,6 @@ public:
     void atualizarEmail();
     void atualizarRua();
     void atualizarBairro();
-    void atualizarEmail();
     void fecharJanelaAtualizar();
 
     static void callbackBairro(Fl_Widget* w, void* data);

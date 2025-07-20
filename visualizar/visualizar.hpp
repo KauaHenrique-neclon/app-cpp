@@ -32,6 +32,6 @@ public:
     void fecharJanela();
     pqxx::result buscarDados();
     void preencherTabela();
-    static void draw_cell(Fl_Table* table, int row, int col, int X, int Y, int W, int H, Visualizar* instance);
-    static void table_callback(Fl_Widget* w, void* data);
+    static void drawcell(Fl_Table* table, int row, int col, int X, int Y, int W, int H, Visualizar* instance);
+    static void tablecallback(Fl_Widget* w, void* data);
 };

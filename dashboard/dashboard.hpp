@@ -36,5 +36,5 @@ public:
    void fecharJanelaDash();
    static void cadastrarAdmCallback(Fl_Widget* w, void* data);
    void cadastrarAdmBanco();
-   void mostrarDash(int argc, char **argv);
+   void mostrar(int argc, char **argv);
 };

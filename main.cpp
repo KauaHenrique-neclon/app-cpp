@@ -9,6 +9,7 @@
 #include "cadastrar/cadastrar.hpp"
 #include "visualizar/visualizar.hpp"
 #include "atualizar/atualizar.hpp"
+#include "dashboard/dashboard.hpp"
 
 
 
@@ -20,18 +21,19 @@ public:
     void mostrar(int argc, char **argv);
     pqxx::connection* banco();
 
-
 private:
     Fl_Window *window;
     Fl_Box *labalInicial;
     Fl_Button *botaoCadastrar, *botaoVisualizar;
     Fl_Button *botaoAtualizar;
+    Fl_Button *botaoDash;
     Fl_Box *tituloTotal, *totalAluno;
     Fl_Group *grupo;
     pqxx::connection* conn;
     static void botaoCadastrarCallback(Fl_Widget *widget, void *data);
     static void botaoVisualizarCallback(Fl_Widget *widget, void *data);
     static void botaoAtualizarCallback(Fl_Widget *widget, void *data);
+    static void botaoDashCallback(Fl_Widget *widget, void *data);
 };
 
 
@@ -79,6 +81,13 @@ void Janela::botaoAtualizarCallback(Fl_Widget *widget, void *data){
     janelaAtual->window->show();
 }
 
+void Janela::botaoDashCallback(Fl_Widget *widget, void *data){
+    Janela* janelaAtual = static_cast<Janela*>(data);
+    janelaAtual->window->hide();
+    Dashboard *janelaDash = new Dashboard(500, 400, "Dashboard");
+    janelaAtual->mostrar(0, nullptr);
+    janelaAtual->window->show();
+}
 
 
 
@@ -106,18 +115,18 @@ Janela::Janela(int largura, int altura, const char* titulo) {
     botaoVisualizar->callback(botaoVisualizarCallback, this);
 
 
-    botaoVisualizar = new Fl_Button(150,80,100,30, "Visualizar");
-    botaoVisualizar->color(fl_rgb_color(3, 173, 252));
-    botaoVisualizar->labelcolor(fl_rgb_color(255, 255, 255));
-    botaoVisualizar->box(FL_ROUND_UP_BOX);
-    botaoVisualizar->callback(botaoVisualizarCallback, this);
-
-
-    botaoAtualizar = new Fl_Button(150,80,100,30, "Visualizar");
+    botaoAtualizar = new Fl_Button(20,120,100,30, "Atualizar");
     botaoAtualizar->color(fl_rgb_color(3, 173, 252));
     botaoAtualizar->labelcolor(fl_rgb_color(255, 255, 255));
     botaoAtualizar->box(FL_ROUND_UP_BOX);
     botaoAtualizar->callback(botaoAtualizarCallback, this);
+
+
+    botaoDash = new Fl_Button(150,120,100,30, "Dahsboard");
+    botaoDash->color(fl_rgb_color(3, 173, 252));
+    botaoDash->labelcolor(fl_rgb_color(255, 255, 255));
+    botaoDash->box(FL_ROUND_UP_BOX);
+    botaoDash->callback(botaoDashCallback, this);
    
 
 
@@ -129,19 +138,19 @@ Janela::Janela(int largura, int altura, const char* titulo) {
         int totalAlunos = resul[0][0].as<int>();
         int* dados = new int[1];
         dados[0] = totalAlunos;
-        grupo = new Fl_Group(20, 130, 180, 80);
+        grupo = new Fl_Group(20, 240, 180, 80);
         grupo->box(FL_FLAT_BOX);
         grupo->color(fl_rgb_color(135,206,250));
         grupo->labelcolor(fl_rgb_color(0,0,0));
         //grupo->box(FL_)
 
-        tituloTotal = new Fl_Box(27, 140, 180, 20, "Total Alunos");
-        totalAluno = new Fl_Box(27, 170, 180, 20, std::to_string(totalAlunos).c_str());
+        tituloTotal = new Fl_Box(27, 250, 180, 20, "Total Alunos");
+        totalAluno = new Fl_Box(27, 270, 180, 20, std::to_string(totalAlunos).c_str());
         grupo->add(tituloTotal);
         grupo->add(totalAluno);
     } else {
         int* dados = new int[1];
-        grupo = new Fl_Group(20, 130, 200, 150);
+        grupo = new Fl_Group(20, 240, 200, 150);
         grupo->box(FL_ENGRAVED_FRAME);
         tituloTotal = new Fl_Box(30, 140, 180, 20, "Total Alunos");
         totalAluno = new Fl_Box(30, 170, 180, 20,"None");
@@ -158,6 +167,8 @@ Janela::Janela(int largura, int altura, const char* titulo) {
     window->add(labalInicial);
     window->add(botaoCadastrar);
     window->add(botaoVisualizar);
+    window->add(botaoAtualizar);
+    window->add(botaoDash);
     window->add(grupo);
     window->end();
 };

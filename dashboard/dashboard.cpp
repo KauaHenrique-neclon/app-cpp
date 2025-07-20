@@ -102,7 +102,7 @@ void Dashboard::fecharJanelaDash(){
     windows->hide();
 }
 
-void Dashboard::mostrarDash(int argc, char **argv) {
+void Dashboard::mostrar(int argc, char **argv) {
     windows->show(argc, argv);
     Fl::run();
 }
