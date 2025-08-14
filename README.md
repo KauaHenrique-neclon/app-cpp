@@ -32,6 +32,6 @@ Funcionalidades
 
 Se você deseja contribuir para o projeto, por favor, envie um pull request com suas alterações. Todas as contribuições são bem-vindas!
 
-###### Ainda sendo desenvolvido
+### Ainda sendo desenvolvido
 Como estudos da faculdade para criar interface, estava desenvolvendo esse projeto e não finalizei, mas está bem legal e adiantado.
 Espero que goste.
